@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import type { RMCharacter, RMApiInfo, SortOrder, RMApiResponse } from '../types/rm.types';
+import type { RMCharacter, RMApiInfo, SortOrder, RMApiResponse } from '../types';
 
 export const ApiContext = createContext<any>(null);
 

@@ -1,7 +1,9 @@
 import { useApi } from "../context/ApiContext";
+import { navigate } from "../routes";
 
 export default function Home() {
 
+   
     const { characters, loading } = useApi();
 
     return (
@@ -30,7 +32,7 @@ export default function Home() {
                         <p>No characters found.</p>
                     ) : (
                         characters.map((character: any) => (
-                            <article key={character.id} className="list__item">
+                            <article key={character.id} className="list__item" onClick={() => navigate(`/details/${character.id}`)}>
                                 <img
                                     src={character.image}
                                     alt={character.name}
