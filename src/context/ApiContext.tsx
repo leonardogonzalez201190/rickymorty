@@ -90,9 +90,9 @@ export default function ApiContextProvider({ children }: { children: ReactNode }
 
                 // SORT local
                 if (queryParams.sort === "asc") {
-                    results.sort((a, b) => a.name.localeCompare(b.name));
+                    results.sort((a: any, b: any) => a.name.localeCompare(b.name));
                 } else if (queryParams.sort === "desc") {
-                    results.sort((a, b) => b.name.localeCompare(a.name));
+                    results.sort((a: any, b: any) => b.name.localeCompare(a.name));
                 }
 
                 setCharacters(results);

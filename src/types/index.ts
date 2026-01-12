@@ -1,27 +1,39 @@
+import type { ComponentType, LazyExoticComponent } from "react";
+
 // Character types: Defines the shape of the Rick and Morty character data
-export interface RMCharacter {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  type: string;
-  gender: string;
-  image: string;
+export type RMCharacter = {
+  id?: number;
+  name?: string;
+  status?: string;
+  species?: string;
+  type?: string;
+  gender?: string;
+  image?: string;
+  origin?: {
+    name?: string;
+    url?: string;
+  }
 }
 
-export interface RMApiInfo {
+export type CardProps = RMCharacter & {
+  onClick?: () => void;
+  variant?: "list" | "details";
+  isLoading?: boolean;
+};
+
+export type RMApiInfo = {
   count: number;
   pages: number;
   next: string | null;
   prev: string | null;
 }
 
-export interface RMApiResponse {
+export type RMApiResponse = {
   info: RMApiInfo;
   results: RMCharacter[];
 }
 
-export interface UseRMListState {
+export type UseRMListState = {
   characters: RMCharacter[];
   info: RMApiInfo | null;
   loading: boolean;
@@ -31,20 +43,27 @@ export interface UseRMListState {
   reload: () => void;
 }
 
-export interface CharacterCardProps {
-  character: RMCharacter | null;
+export type CharacterCardProps = {
+  character: RMCharacter;
   isLoading?: boolean;
   onClick?: () => void;
 }
 
 export type SortOrder = "asc" | "desc" | "none";
 
-export interface OrderControlProps {
+export type OrderControlProps = {
   sortOrder: SortOrder;
   onChange: (nextOrder: SortOrder) => void;
 }
 
-export interface RMListData {
+export type RMListData = {
   results: RMCharacter[];
   info: RMApiInfo | null;
+}
+
+
+
+
+export type RoutesMap = {
+  [path: string]: ComponentType<any> | LazyExoticComponent<any>;
 }

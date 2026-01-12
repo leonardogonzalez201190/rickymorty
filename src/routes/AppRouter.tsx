@@ -1,30 +1,21 @@
-import { useEffect, useState } from "react";
-import type { ComponentType } from "react";
-import { resolveRoute } from "./resolveRoute";
+import { Suspense } from "react";
+import { useCurrentRoute } from "./useCurrentRoute";
+import NotFound from "../pages/NotFound";
 
-interface RoutesMap {
-  [path: string]: ComponentType<any>;
-}
+export default function AppRouter({ routes }: { routes: any[] }) {
 
-interface AppRouterProps {
-  routes: RoutesMap;
-}
+  const route = useCurrentRoute(routes);
 
-export default function AppRouter({ routes }: AppRouterProps) {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  if (!route) {
+    return <NotFound />;
+  }
 
-  useEffect(() => {
-    const onLocationChange = () => {
-      setCurrentPath(window.location.pathname);
-    };
+  const Component = route.component;
+  const fallback = route.fallback || null;
 
-    window.addEventListener("popstate", onLocationChange);
-    return () => window.removeEventListener("popstate", onLocationChange);
-  }, []);
-
-  const resolved = resolveRoute(routes, currentPath);
-  const Component = resolved?.component || routes["/"];
-  const params = resolved?.params || {};
-
-  return <Component params={params} />;
+  return (
+    <Suspense fallback={fallback}>
+      <Component params={route.params} />
+    </Suspense>
+  );
 }

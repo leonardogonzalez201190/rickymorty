@@ -11,9 +11,11 @@ export function List() {
         <section className="list">
             {loading ? (
                 Array.from({ length: 10 }).map((_, index) => (
-                    <article
+                    <Card
                         key={index}
-                        className="list__item_loading"
+                        isLoading={true}
+                        image=""
+                        name=""
                     />
                 ))
             ) : characters.length === 0 ? (
@@ -25,6 +27,7 @@ export function List() {
                         onClick={() => navigate(`/details/${character.id}`)}
                         image={character.image}
                         name={character.name}
+                        species={character.species}
                         status={character.status}
                     />
                 ))
