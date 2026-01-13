@@ -1,5 +1,6 @@
 import { useInViewport } from "../hooks/useInViewport";
 import type { CardProps } from "../types";
+import "../styles/card.css";
 
 export function Card({
     image,

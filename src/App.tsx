@@ -1,6 +1,6 @@
 import AppRouter from "./routes/AppRouter";
 import { routes } from "./routes/routes";
-import "./App.css";
+import "./styles/app.css";
 import ApiContextProvider from "./context/ApiContext";
 
 // App component: Root component of the application.
