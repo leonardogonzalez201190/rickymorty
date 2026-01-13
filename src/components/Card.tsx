@@ -31,18 +31,24 @@ export function Card({
             className={`list__item ${isDetails ? "card--details" : "card--list"}`}
             onClick={onClick}
         >
-            {(isLoading || !visible) ?
-                <div
-                    className="list__item_loading"
-                    role="status"
-                    aria-label="loading"
-                />
-                : <img
-                    src={image}
-                    alt={name}
-                    className="card__image"
-                />}
+            <div className="card__image-wrapper">
+                {(!visible || isLoading) && (
+                    <div
+                        className="card__image-skeleton"
+                        aria-hidden
+                    />
+                )}
 
+                {visible && !isLoading && (
+                    <img
+                        src={image}
+                        alt={name}
+                        className="card__image"
+                        loading="lazy"
+                        decoding="async"
+                    />
+                )}
+            </div>
             <footer className="card__footer">
                 <h3>{isLoading ? "Name" : name}</h3>
                 <div className="card__status">
