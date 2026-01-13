@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react"
 import { it, expect, vi, beforeEach, describe } from "vitest"
 import userEvent from "@testing-library/user-event"
 import App from "../App"
-import { useInViewport } from "../hooks/useInViewport"
 
 vi.mock("../hooks/useInViewport", () => ({
     useInViewport: vi.fn(() => ({

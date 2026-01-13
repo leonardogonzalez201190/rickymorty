@@ -133,10 +133,21 @@
     padding: 20px;
 }
 
+.filters__separator {
+    width: 1px;
+    height: 28px;
+    background-color: var(--border-color, #ddd);
+    align-self: stretch;
+}
+
 @media (max-width: 600px) {
     .filters {
         flex-direction: column;
         justify-content: center;
         gap: 5px;
+    }
+
+    .filters__separator {
+        display: none;
     }
 }

@@ -10,6 +10,7 @@ export default function Home() {
                 <Header />
                 <nav className="filters">
                     <Filters />
+                    <div className="filters__separator" aria-hidden="true" />
                     <Pagination />
                 </nav>
             </header>
