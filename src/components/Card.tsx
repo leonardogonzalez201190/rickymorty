@@ -50,23 +50,39 @@ export function Card({
                 )}
             </div>
             <footer className="card__footer">
-                <h3>{isLoading ? "Name" : name}</h3>
+                <h3>
+                    {isLoading ? <span className="text-skeleton title" /> : name}
+                </h3>
                 <div className="card__status">
-                    <span className={`status-dot ${status === "Alive" ? "status-dot--alive" : "status-dot--dead"}`}
-                        aria-hidden
-                    />
-
-                    <span className="status-text">
-                        {isLoading ? "Status" : status} – {isLoading ? "Species" : species}
-                    </span>
+                    {isLoading ? (
+                        <span className="text-skeleton line" />
+                    ) : (
+                        <>
+                            <span
+                                className={`status-dot ${status === "Alive"
+                                    ? "status-dot--alive"
+                                    : "status-dot--dead"
+                                    }`}
+                                aria-hidden
+                            />
+                            <span className="status-text">
+                                {status} – {species}
+                            </span>
+                        </>
+                    )}
                 </div>
                 {isDetails && (
                     <>
-                        <p><strong>Gender:</strong> {isLoading ? "Gender" : gender}</p>
-                        <p><strong>Origin:</strong> {isLoading ? "Origin" : origin?.name}</p>
+                        <p>
+                            <strong>Gender:</strong>{" "}
+                            {isLoading ? <span className="text-skeleton small" /> : gender}
+                        </p>
+                        <p>
+                            <strong>Origin:</strong>{" "}
+                            {isLoading ? <span className="text-skeleton medium" /> : origin?.name}
+                        </p>
                     </>
                 )}
-
             </footer>
         </article>
     );

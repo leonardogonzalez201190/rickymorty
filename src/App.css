@@ -163,6 +163,10 @@
     object-fit: cover;
 }
 
+.card--details {
+    width: 300px;
+}
+
 /* Skeleton */
 .card__image-skeleton {
     background: linear-gradient(90deg,

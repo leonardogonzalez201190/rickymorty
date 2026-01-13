@@ -20,6 +20,7 @@ export function useRMDetail(id: string | null) {
 
     const fetchCharacter = async () => {
       try {
+
         const res = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
 
         if (!res.ok) throw new Error(`Failed to fetch character (${res.status})`);
