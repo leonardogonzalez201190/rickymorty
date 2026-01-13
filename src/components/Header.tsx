@@ -1,37 +1,60 @@
 import { useApi } from "../context/ApiContext";
 import { debounce } from "../utils/debounce";
+import { useState, useMemo } from "react";
 
 export function Header() {
-    
-    const { updateQueryParams } = useApi();
+  const { updateQueryParams, queryParams } = useApi();
+  const [search, setSearch] = useState(queryParams.name ?? "");
 
-    const clearAllFilters = () => {
-        updateQueryParams({
-            page: 1,
-            name: "",
-            sort: "none",
-            status: "",
-            species: "",
-            gender: "",
-        });
-    };
+  const clearAllFilters = () => {
+    setSearch("");
+    updateQueryParams({
+      page: 1,
+      name: "",
+      sort: "none",
+      status: "",
+      species: "",
+      gender: "",
+    });
+  };
 
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        updateQueryParams({
-            page: 1,
-            name: e.target.value,
-            sort: "none",
-            status: "",
-            species: "",
-            gender: "",
-        });
-    };  
+  const handleSearch = (value: string) => {
+    updateQueryParams({
+      page: 1,
+      name: value,
+      sort: "none",
+      status: "",
+      species: "",
+      gender: "",
+    });
+  };
 
-    return (
-        <nav className="header__nav">
-            <h1 className="header__title">Rick and Morty</h1>
-            <input role="search" type="search" placeholder="Search" autoFocus={true} onChange={debounce(handleSearch, 500)} />
-            <button onClick={clearAllFilters}>Clear All</button>
-        </nav>
-    )
+
+  const debouncedSearch = useMemo(
+    () => debounce(handleSearch, 500),
+    []
+  );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+    debouncedSearch(value);
+  };
+
+  return (
+    <nav className="header__nav">
+      <h1 className="header__title">Rick and Morty</h1>
+
+      <input
+        value={search}
+        role="search"
+        type="search"
+        placeholder="Search"
+        autoFocus
+        onChange={handleSearchChange}
+      />
+
+      <button onClick={clearAllFilters}>Clear All</button>
+    </nav>
+  );
 }
